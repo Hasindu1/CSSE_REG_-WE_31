@@ -42,8 +42,8 @@ public class GetEmpService extends UtilConfig {
 	private GetEmpService() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"),
-					prop.getProperty("password"));
+			conn = DriverManager.getConnection(prop.getProperty(GlobalConstant.URL), prop.getProperty(GlobalConstant.USER_NAME),
+					prop.getProperty(GlobalConstant.PASSWORD));
 		} catch (Exception e) {
 		} 
 	}

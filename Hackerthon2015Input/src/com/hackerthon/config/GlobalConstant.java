@@ -29,6 +29,13 @@ public class GlobalConstant {
 	public static final String DEPARTMENT = "Department";
 	public static final String DESIGNATION = "Designation";
 	
+	//constant to read property file for url
+	public static final String URL = "url";
+	//constant to read property file for username
+	public static final String USER_NAME = "username";
+	//constant to read property file for password
+	public static final String PASSWORD = "password";
+	
 	public static final String CONFIG_PROP_PATH = "../config/config.properties";
 	public static final String CONFIG_EMP_QUERY_XML = "src/com/hackerthon/config/EmployeeQuery.xml";
 	public static final String CONFIG_EMP_REQ_XML = "src/com/hackerthon/config/EmployeeRequest.xml";
