@@ -1,17 +1,5 @@
 package com.hackerthon.main;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.concurrent.AbstractExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import com.hackerthon.common.UtilTransform;
 import com.hackerthon.service.GetEmpService;
 
@@ -19,7 +7,6 @@ public class ExecuteMain {
 
 	/**
 	 * @param args
-	 * @throws Exception 
 	 */
 	public static void main(String[] args) {
 
@@ -33,7 +20,8 @@ public class ExecuteMain {
 //			employeeService.EMPLOYEEDELETE("EMP10001");
 			employeeService.employeeDisplay();
 		} catch (Exception e) {
-		} 
+		}
+
 	}
 
 }

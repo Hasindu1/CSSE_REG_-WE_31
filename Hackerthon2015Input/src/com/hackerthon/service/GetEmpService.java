@@ -1,5 +1,6 @@
 package com.hackerthon.service;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +8,7 @@ import com.hackerthon.common.UtilTransform;
 import com.hackerthon.config.GlobalConstant;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import com.hackerthon.common.UtilQuery;
 import com.hackerthon.model.Employee;
@@ -16,8 +18,10 @@ import java.util.concurrent.AbstractExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.xml.sax.SAXException;
 
 import com.hackerthon.common.UtilConfig;
 
@@ -74,7 +78,21 @@ public class GetEmpService extends UtilConfig {
 				//Logger
 				log.info(emp.toString() + "\n");
 			}
-		} catch (Exception e) {
+		} catch(NumberFormatException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(XPathExpressionException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(SAXException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(IOException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(ParserConfigurationException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch(NullPointerException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch (Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
