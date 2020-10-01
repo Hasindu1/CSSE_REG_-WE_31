@@ -13,7 +13,11 @@ import com.hackerthon.model.Employee;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.AbstractExecutorService;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.xpath.XPathExpressionException;
+
 
 import com.hackerthon.common.UtilConfig;
 
@@ -40,6 +44,7 @@ public class GetEmpService extends UtilConfig {
 		} 
 	}
 	
+	// Singleton pattern
 	public static GetEmpService getInstance() 
     { 
         if (singleInstance == null) 
@@ -51,6 +56,11 @@ public class GetEmpService extends UtilConfig {
 	public void employeesFromXml() {
 
 		try {
+			/*
+			 * The method xmlXPaths() returns ArrayList that comprises 
+			 * employee details as map elements. Read each map element and 
+			 * assign to Employee object
+			 */
 			for (Map<String, String> empSet : UtilTransform.xmlXPaths()) {
 				Employee emp = new Employee();
 				emp.setEmpId(empSet.get(GlobalConstant.X_PATH_EMPLOYEE_ID_KEY));
@@ -65,34 +75,43 @@ public class GetEmpService extends UtilConfig {
 				log.info(emp.toString() + "\n");
 			}
 		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
 	public void employeeTableCreate() {
 		try {
+			
+			// create and drop statement 
 			statement = conn.createStatement();
 			statement.executeUpdate(UtilQuery.query(GlobalConstant.Q2));
 			statement.executeUpdate(UtilQuery.query(GlobalConstant.Q1));
 		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
 	public void employeesAdd() {
 		try {
+			/*
+			 * prepare statement to execute insert
+			 * data to employee table
+			 */
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q3));
 			conn.setAutoCommit(false);
 			for(Employee emp : employeeList ){			
-				preparedStatement.setString(1, emp.getEmpId());
-				preparedStatement.setString(2, emp.getFullName());
-				preparedStatement.setString(3, emp.getAddress());
-				preparedStatement.setString(4, emp.getFacultyName());
-				preparedStatement.setString(5, emp.getDepartment());
-				preparedStatement.setString(6, emp.getDesignation());
+				preparedStatement.setString(GlobalConstant.ONE, emp.getEmpId());
+				preparedStatement.setString(GlobalConstant.TWO, emp.getFullName());
+				preparedStatement.setString(GlobalConstant.THREE, emp.getAddress());
+				preparedStatement.setString(GlobalConstant.FOUR, emp.getFacultyName());
+				preparedStatement.setString(GlobalConstant.FIVE, emp.getDepartment());
+				preparedStatement.setString(GlobalConstant.SIX, emp.getDesignation());
 				preparedStatement.addBatch();
 			}
 			preparedStatement.executeBatch();
 			conn.commit();
 		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
@@ -100,6 +119,7 @@ public class GetEmpService extends UtilConfig {
 
 		Employee emp = new Employee();
 		try {
+			// get employee details by his id
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q4));
 			preparedStatement.setString(1, eid);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -115,17 +135,19 @@ public class GetEmpService extends UtilConfig {
 			empList.add(emp);
 			employeeOutput(empList);
 		} catch (Exception ex) {
+			log.log(Level.SEVERE, ex.getMessage());
 		}
 	}
 
 	public void employeeDelete(String eid) {
 
 		try {
+			// prepare statement to delete a employee 
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q6));
 			preparedStatement.setString(1, eid);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
@@ -133,6 +155,10 @@ public class GetEmpService extends UtilConfig {
 
 		ArrayList<Employee> empList = new ArrayList<Employee>();
 		try {
+			/*
+			 * prepare statement to retrieve employee details
+			 * and assign to ArrayList to display
+			 */
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q5));
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -146,14 +172,15 @@ public class GetEmpService extends UtilConfig {
 				empList.add(emp);
 			}
 		} catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
 		}
 		employeeOutput(empList);
 	}
 	
 	public void employeeOutput(ArrayList<Employee> l){
 		
-		System.out.println("Employee ID" + "\t\t" + "Full Name" + "\t\t" + "Address" + "\t\t" + "Faculty Name" + "\t\t"
-				+ "Department" + "\t\t" + "Designation" + "\n");
+		System.out.println(GlobalConstant.EMPID + "\t\t" + GlobalConstant.ADDRESS + "\t\t" + "Address" + "\t\t" + GlobalConstant.FACULTY_NAME + "\t\t"
+				+ GlobalConstant.DEPARTMENT+ "\t\t" + GlobalConstant.DESIGNATION + "\n");
 		System.out
 				.println("================================================================================================================");
 		for(Employee e : l){

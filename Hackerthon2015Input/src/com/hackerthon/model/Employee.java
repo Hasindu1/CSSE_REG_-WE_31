@@ -1,5 +1,7 @@
 package com.hackerthon.model;
 
+import com.hackerthon.config.GlobalConstant;
+
 public class Employee {
 
 	public String empId;
@@ -60,8 +62,8 @@ public class Employee {
 	@Override
 	public String toString() {
 		
-		return "Employee ID = " + empId + "\n" + "FullName = " + fullName + "\n" + "Address = " + address + "\n"
-				+ "Faculty Name = " + facultyName + "\n" + "Department = " + department + "\n" + "Designation = "
+		return GlobalConstant.EMPID + empId + "\n" + GlobalConstant.FULL_NAME + fullName + "\n" + GlobalConstant.ADDRESS + address + "\n"
+				+ GlobalConstant.FACULTY_NAME + facultyName + "\n" + GlobalConstant.DEPARTMENT + department + "\n" + GlobalConstant.DESIGNATION
 				+ designation;
 	}
 }

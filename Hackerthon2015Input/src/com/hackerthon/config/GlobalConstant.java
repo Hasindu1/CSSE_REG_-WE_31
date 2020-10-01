@@ -15,6 +15,20 @@ public class GlobalConstant {
 	public static final String Q5 ="q5";
 	public static final String Q6 ="q6";
 	
+	public static final int ONE = 1;
+	public static final int TWO = 2;
+	public static final int THREE = 3;
+	public static final int FOUR = 4;
+	public static final int FIVE = 5;
+	public static final int SIX = 6;
+	
+	public static final String EMPID = "Employee ID";
+	public static final String FULL_NAME = "FullName";
+	public static final String ADDRESS = "Address";
+	public static final String FACULTY_NAME = "Faculty Name";
+	public static final String DEPARTMENT = "Department";
+	public static final String DESIGNATION = "Designation";
+	
 	public static final String CONFIG_PROP_PATH = "../config/config.properties";
 	public static final String CONFIG_EMP_QUERY_XML = "src/com/hackerthon/config/EmployeeQuery.xml";
 	public static final String CONFIG_EMP_REQ_XML = "src/com/hackerthon/config/EmployeeRequest.xml";
