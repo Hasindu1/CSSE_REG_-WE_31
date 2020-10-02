@@ -146,7 +146,7 @@ public class GetEmpService extends UtilConfig {
 		try {
 			// get employee details by his id
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q4));
-			preparedStatement.setString(1, eid);
+			preparedStatement.setString(GlobalConstant.ONE, eid);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				emp.setEmpId(resultSet.getString(1));
