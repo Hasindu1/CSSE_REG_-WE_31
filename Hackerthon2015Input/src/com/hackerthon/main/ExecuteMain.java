@@ -1,7 +1,7 @@
 package com.hackerthon.main;
 
 import com.hackerthon.common.UtilTransform;
-import com.hackerthon.service.GetEmpService;
+import com.hackerthon.service.EmpService;
 
 public class ExecuteMain {
 
@@ -10,7 +10,7 @@ public class ExecuteMain {
 	 */
 	public static void main(String[] args) {
 
-		GetEmpService employeeService = GetEmpService.getInstance();
+		EmpService employeeService = EmpService.getInstance();
 		try {
 			UtilTransform.requestTransform();
 			employeeService.employeesFromXml();

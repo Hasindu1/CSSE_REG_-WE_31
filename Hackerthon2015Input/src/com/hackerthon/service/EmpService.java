@@ -27,13 +27,13 @@ import org.xml.sax.SAXException;
 
 import com.hackerthon.common.UtilConfig;
 
-public class GetEmpService extends UtilConfig {
+public class EmpService extends UtilConfig {
 
 	private final ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	
 	public static final Logger log = Logger.getLogger(AbstractExecutorService.class.getName());
 	
-	private static GetEmpService singleInstance = null; 
+	private static EmpService singleInstance = null; 
 
 	private static Connection conn;
 
@@ -41,7 +41,7 @@ public class GetEmpService extends UtilConfig {
 
 	private PreparedStatement preparedStatement;
 
-	private GetEmpService() {
+	private EmpService() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(prop.getProperty(GlobalConstant.URL), prop.getProperty(GlobalConstant.USER_NAME),
@@ -55,10 +55,10 @@ public class GetEmpService extends UtilConfig {
 	}
 	
 	// Singleton pattern
-	public static GetEmpService getInstance() 
+	public static EmpService getInstance() 
     { 
         if (singleInstance == null) 
-        	singleInstance = new GetEmpService(); 
+        	singleInstance = new EmpService(); 
   
         return singleInstance; 
     } 
