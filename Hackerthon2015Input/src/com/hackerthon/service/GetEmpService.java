@@ -1,5 +1,6 @@
 package com.hackerthon.service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -83,11 +84,9 @@ public class GetEmpService extends UtilConfig {
 				//Logger
 				log.info(emp.toString() + "\n");
 			}
-		} catch(XPathException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(Exception e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}
+		}  catch (Exception e) {
+			log.warning(e.getMessage());
+		} 
 		
 	}
 
@@ -126,8 +125,8 @@ public class GetEmpService extends UtilConfig {
 			conn.commit();
 		}catch(SQLException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		}catch (Exception ex) {
-			log.log(Level.SEVERE, ex.getMessage());
+		}catch(Exception e) {
+			log.log(Level.SEVERE, e.getMessage()); 
 		}
 	}
 
