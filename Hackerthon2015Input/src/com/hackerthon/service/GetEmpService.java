@@ -44,8 +44,11 @@ public class GetEmpService extends UtilConfig {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(prop.getProperty(GlobalConstant.URL), prop.getProperty(GlobalConstant.USER_NAME),
 					prop.getProperty(GlobalConstant.PASSWORD));
-		} catch (Exception e) {
-		} 
+		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch (Exception e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}
 	}
 	
 	// Singleton pattern
@@ -104,7 +107,9 @@ public class GetEmpService extends UtilConfig {
 			statement = conn.createStatement();
 			statement.executeUpdate(UtilQuery.query(GlobalConstant.Q2));
 			statement.executeUpdate(UtilQuery.query(GlobalConstant.Q1));
-		} catch (Exception e) {
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage()); 
+		}catch (Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
@@ -128,7 +133,9 @@ public class GetEmpService extends UtilConfig {
 			}
 			preparedStatement.executeBatch();
 			conn.commit();
-		} catch (Exception e) {
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}catch (Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
@@ -152,7 +159,10 @@ public class GetEmpService extends UtilConfig {
 			ArrayList<Employee> empList = new ArrayList<Employee>();
 			empList.add(emp);
 			employeeOutput(empList);
-		} catch (Exception ex) {
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage()); 
+		}
+		catch (Exception ex) {
 			log.log(Level.SEVERE, ex.getMessage());
 		}
 	}
@@ -164,6 +174,8 @@ public class GetEmpService extends UtilConfig {
 			preparedStatement = conn.prepareStatement(UtilQuery.query(GlobalConstant.Q6));
 			preparedStatement.setString(1, eid);
 			preparedStatement.executeUpdate();
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage()); 
 		} catch (Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
@@ -189,7 +201,9 @@ public class GetEmpService extends UtilConfig {
 				emp.setDesignation(resultSet.getString(6));
 				empList.add(emp);
 			}
-		} catch (Exception e) {
+		}catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage()); 
+		}catch (Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 		employeeOutput(empList);
