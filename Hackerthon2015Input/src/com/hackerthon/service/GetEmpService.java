@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
@@ -46,7 +47,8 @@ public class GetEmpService extends UtilConfig {
 					prop.getProperty(GlobalConstant.PASSWORD));
 		} catch(SQLException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		}catch (Exception e) {
+		}
+		catch(ClassNotFoundException e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
@@ -81,23 +83,12 @@ public class GetEmpService extends UtilConfig {
 				//Logger
 				log.info(emp.toString() + "\n");
 			}
-		} catch(NumberFormatException e) {
+		} catch(XPathException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		}catch(XPathExpressionException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(SAXException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(IOException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(ParserConfigurationException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(SQLException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch(NullPointerException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}catch (Exception e) {
+		}catch(Exception e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
+		
 	}
 
 	public void employeeTableCreate() {
@@ -109,8 +100,8 @@ public class GetEmpService extends UtilConfig {
 			statement.executeUpdate(UtilQuery.query(GlobalConstant.Q1));
 		}catch(SQLException e) {
 			log.log(Level.SEVERE, e.getMessage()); 
-		}catch (Exception e) {
-			log.log(Level.SEVERE, e.getMessage());
+		}catch(Exception e) {
+			log.log(Level.SEVERE, e.getMessage()); 
 		}
 	}
 
@@ -135,8 +126,8 @@ public class GetEmpService extends UtilConfig {
 			conn.commit();
 		}catch(SQLException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		}catch (Exception e) {
-			log.log(Level.SEVERE, e.getMessage());
+		}catch (Exception ex) {
+			log.log(Level.SEVERE, ex.getMessage());
 		}
 	}
 
